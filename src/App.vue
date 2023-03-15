@@ -42,8 +42,8 @@ export default {
       recipes: [
         {
           id: 1,
-          title: 'Mon titre',
-          desc: 'Oui',
+          title: 'Recette 1',
+          desc: 'C\'est une très bonne recette.\nEt oui...',
           ingredients: [
             {
               id: 1,
@@ -57,16 +57,16 @@ export default {
         },
         {
           id: 2,
-          title: 'Mon titre 2',
-          desc: 'Oui 2',
+          title: 'Recette 2',
+          desc: 'C\'est une très bonne recette\nEt oui...',
           ingredients: [
             {
               id: 3,
-              label: 'Ingredient 1'
+              label: 'Ingredient 3'
             },
             {
               id: 4,
-              label: 'Ingredient 2'
+              label: 'Ingredient 4'
             },
           ]
         },
@@ -116,11 +116,8 @@ export default {
       this.recipes.find((e) => e.id === recipeId).ingredients.splice(index, 1)
     },
     updateRecipe (id, newData) {
-      return console.log(newData)
-      this.recipes.find((e) => e.id === id) = {
-        ...newData,
-        ingredients: [...newData.ingredients]
-      }
+      const index = this.recipes.findIndex((e) => e.id === id)
+      this.recipes[index] = {...newData}
       this.recipeSelectedToEdit = {}
     },
     addIngredient (recipeId, label) {
@@ -130,7 +127,7 @@ export default {
       })
     },
     deleteRecipe (id) {
-      const index = this.recipes.indexOf(this.recipes.find((e) => e.id === id))
+      const index = this.recipes.findIndex((e) => e.id === id)
       this.recipes.splice(index, 1)
     },
     checkShoppingListItem (id) {
