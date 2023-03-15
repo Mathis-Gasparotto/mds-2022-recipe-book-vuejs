@@ -317,6 +317,10 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
+.shopping-list-item--checked {
+  text-decoration: line-through;
+}
+
 .shopping-list-actions {
   display: flex;
   gap: 0.5rem;

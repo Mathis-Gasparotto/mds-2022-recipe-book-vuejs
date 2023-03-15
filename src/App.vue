@@ -13,6 +13,13 @@
       @updateRecipe="(newRecipe) => updateRecipe(recipeSelectedToEdit.id, newRecipe)"
       @addIngredient="(value) => addIngredient(recipeSelectedToEdit.id, value)"
     />
+    <ShoppingList 
+      :shoppingList="shoppingList" 
+      @checkShoppingListItem="(id) => checkShoppingListItem(id)" 
+      @checkAllShoppingListItem="checkAllShoppingListItem()"
+      @clearCheckedShoppingListItem="clearCheckedShoppingListItem()"
+      @clearAllShoppingListItem="clearAllShoppingListItem()"
+    />
   </div>
 </template>
 
@@ -20,11 +27,13 @@
 import AddRecipeForm from './components/AddRecipeForm.vue'
 import RecipeList from './components/RecipeList.vue'
 import EditRecipe from './components/EditRecipe.vue'
+import ShoppingList from './components/ShoppingList.vue'
 export default {
   components: {
     AddRecipeForm,
     RecipeList,
-    EditRecipe
+    EditRecipe,
+    ShoppingList
   },
   data() {
     return {
@@ -61,7 +70,34 @@ export default {
         },
       ],
       recipeSelectedToView: {},
-      recipeSelectedToEdit: {}
+      recipeSelectedToEdit: {},
+      shoppingList: [
+        {
+          id: 1,
+          label: 'toto',
+          checked: true
+        },
+        {
+          id: 2,
+          label: 'tata',
+          checked: false
+        },
+        {
+          id: 3,
+          label: 'titi',
+          checked: false
+        },
+        {
+          id: 4,
+          label: 'tete',
+          checked: true
+        },
+        {
+          id: 5,
+          label: 'tutu',
+          checked: false
+        },
+      ]
     }
   },
   methods: {
@@ -94,6 +130,18 @@ export default {
     deleteRecipe (id) {
       const index = this.recipes.indexOf(this.recipes.find((e) => e.id === id))
       this.recipes.splice(index, 1)
+    },
+    checkShoppingListItem (id) {
+      this.shoppingList.find((e) => e.id === id).checked = !this.shoppingList.find((e) => e.id === id).checked
+    },
+    checkAllShoppingListItem () {
+      this.shoppingList.forEach((e) => e.checked = true)
+    },
+    clearCheckedShoppingListItem () {
+      this.shoppingList = this.shoppingList.filter((e) => !e.checked)
+    },
+    clearAllShoppingListItem () {
+      this.shoppingList = []
     }
   }
 }

@@ -19,7 +19,7 @@ import IngredientItem from './IngredientItem.vue'
 export default {
   name: 'IngredientsList',
   props: {
-    ingredients: [Object]
+    ingredients: Array
   },
   components: {
     IngredientItem

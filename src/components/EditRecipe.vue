@@ -10,18 +10,20 @@
       @addIngredient="(value) => $emit('addIngredient', value)"
     />
     <div class="recipe-edit-actions">
-      <button class="recipe-edit-save-button" type="button" @click="$emit('updateRecipe', newRecipe)">Save</button>
-      <button class="recipe-edit-cart-button">Add to shopping list</button>
+      <Button className="recipe-edit-save-button" @click="$emit('updateRecipe', newRecipe)">Save</Button>
+      <Button className="recipe-edit-cart-button">Add to shopping list</Button>
     </div>
   </div>
 </template>
 
 <script>
 import IngredientsList from './IngredientsList.vue'
+import Button from './Button.vue'
 export default {
   name: 'EditRecipe',
   components: {
-    IngredientsList
+    IngredientsList,
+    Button
   },
   props: {
     recipe: Object

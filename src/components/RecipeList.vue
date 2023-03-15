@@ -15,7 +15,7 @@ export default {
     RecipeItem 
   },
   props: {
-    recipes: [Object]
+    recipes: Array
   }
 }
 </script>
