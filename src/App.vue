@@ -7,13 +7,13 @@
       @deleteRecipe="(id) => deleteRecipe(id)"
     />
     <EditRecipe 
-      v-if="recipeSelectedToEdit.id" 
+      v-if="recipeSelectedToEdit" 
       :recipe="recipeSelectedToEdit"
       @deleteIngredient="(ingredient) => deleteIngredient(ingredient, recipeSelectedToEdit.id)"
       @updateRecipe="(newRecipe) => updateRecipe(recipeSelectedToEdit.id, newRecipe)"
       @addIngredient="(value) => addIngredient(recipeSelectedToEdit.id, value)"
       @addToShoppingList="addToShoppingList(recipeSelectedToEdit.id)"
-      @exit="recipeSelectedToEdit = {}"
+      @exit="recipeSelectedToEdit = null"
     />
     <ShoppingList 
       :shoppingList="shoppingList" 
@@ -71,8 +71,7 @@ export default {
           ]
         },
       ],
-      recipeSelectedToView: {},
-      recipeSelectedToEdit: {},
+      recipeSelectedToEdit: null,
       shoppingList: [
         {
           id: 1,
@@ -118,7 +117,7 @@ export default {
     updateRecipe (id, newData) {
       const index = this.recipes.findIndex((e) => e.id === id)
       this.recipes[index] = {...newData}
-      this.recipeSelectedToEdit = {}
+      this.recipeSelectedToEdit = null
     },
     addIngredient (recipeId, label) {
       this.recipes.find((e) => e.id === recipeId).ingredients.push({
@@ -129,6 +128,7 @@ export default {
     deleteRecipe (id) {
       const index = this.recipes.findIndex((e) => e.id === id)
       this.recipes.splice(index, 1)
+      if (this.recipeSelectedToEdit.id === id) this.recipeSelectedToEdit = null
     },
     checkShoppingListItem (id) {
       this.shoppingList.find((e) => e.id === id).checked = !this.shoppingList.find((e) => e.id === id).checked

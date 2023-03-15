@@ -36,6 +36,11 @@ export default {
   },
   created () {
     this.newRecipe = {...this.recipe}
+  },
+  watch: {
+    recipe() {
+      this.newRecipe = {...this.recipe}
+    }
   }
 }
 </script>
