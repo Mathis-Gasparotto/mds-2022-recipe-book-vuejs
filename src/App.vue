@@ -12,6 +12,8 @@
       @deleteIngredient="(ingredient) => deleteIngredient(ingredient, recipeSelectedToEdit.id)"
       @updateRecipe="(newRecipe) => updateRecipe(recipeSelectedToEdit.id, newRecipe)"
       @addIngredient="(value) => addIngredient(recipeSelectedToEdit.id, value)"
+      @addToShoppingList="addToShoppingList(recipeSelectedToEdit.id)"
+      @exit="recipeSelectedToEdit = {}"
     />
     <ShoppingList 
       :shoppingList="shoppingList" 
@@ -142,6 +144,15 @@ export default {
     },
     clearAllShoppingListItem () {
       this.shoppingList = []
+    },
+    addToShoppingList (recipeId) {
+      this.recipes.find((e) => e.id === recipeId).ingredients.forEach((e) => {
+        this.shoppingList.push({
+          id: Date.now(),
+          label: e.label,
+          checked: false
+        })
+      })
     }
   }
 }

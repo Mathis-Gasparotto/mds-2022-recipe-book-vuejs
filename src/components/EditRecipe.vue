@@ -10,8 +10,9 @@
       @addIngredient="(value) => $emit('addIngredient', value)"
     />
     <div class="recipe-edit-actions">
+      <Button className="recipe-edit-exit-button" @click="$emit('exit')">Exit</Button>
       <Button className="recipe-edit-save-button" @click="$emit('updateRecipe', newRecipe)">Save</Button>
-      <Button className="recipe-edit-cart-button">Add to shopping list</Button>
+      <Button className="recipe-edit-cart-button" @click="$emit('addToShoppingList')">Add to shopping list</Button>
     </div>
   </div>
 </template>
