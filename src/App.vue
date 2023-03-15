@@ -143,9 +143,9 @@ export default {
       this.shoppingList = []
     },
     addToShoppingList (recipeId) {
-      this.recipes.find((e) => e.id === recipeId).ingredients.forEach((e) => {
+      this.recipes.find((e) => e.id === recipeId).ingredients.forEach((e, index) => {
         this.shoppingList.push({
-          id: Date.now(),
+          id: `${index}-${Date.now()}`,
           label: e.label,
           checked: false
         })
